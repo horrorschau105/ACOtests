@@ -19,12 +19,13 @@ namespace main
                 List<Path> subtree = new List<Path>();
                 for(int j=0;j<neigh;++j)
                 {
-                    subtree.Add(new Path(iterator, Math.Min(created,n), r.Next(1, 6), r.NextDouble()));
+                    subtree.Add(new Path(iterator, Math.Min(created,n), r.Next(1, MAXLENGTH), r.NextDouble()));
                     if (created > n) break;
                     created++;
                 }
                 res.Add(subtree);
             }
+            res.Add(new List<Path>()); // empty list for last verticle
             return res;
         }
     }

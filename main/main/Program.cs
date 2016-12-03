@@ -8,6 +8,9 @@ namespace main
 {
     partial class Program
     {
+        public const int N = 5;// count of verticles, additionally end of graph
+        public const int NEIGH = 2;// how many neighbours has each verticle
+        public const int MAXLENGTH = 10;// max length of path
         static void Main(string[] args)
         {
             /* what to do
@@ -18,14 +21,15 @@ namespace main
              * wait for results
              * 
              */
-            List<List<Path>> graph = GenerateGraph(10, 2);
+            List<List<Path>> graph = GenerateGraph(N, NEIGH);
             foreach(List<Path> ver in graph)
             {
                 foreach(Path p in ver)
                 {
-                    Console.WriteLine("{0}\t{1}", p.from, p.to);
+                    Console.WriteLine("{0}\t{1}\t{2}", p.from, p.to, p.length);
                 }
             }
+            Console.WriteLine("Shortest Path: {0}", CalcShortPath(graph, 0, N));
 
             Console.Read();
         }
