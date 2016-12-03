@@ -17,6 +17,7 @@ namespace main
             position = pos;
             searchingFood = true;
             pheromoneProduction = phP;
+            way = new List<int>();
         }
         public void LeavePheromone(Path path)
         {

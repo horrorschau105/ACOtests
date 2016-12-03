@@ -11,14 +11,16 @@ namespace main
         public int from;
         public int to;
         public double pheromone;
-        public bool visited;
-
-        public Path(int s, int e, double ph=0)
+        public bool visited { get; set; }
+        public int length { get; set;  }
+        
+        public Path(int s, int e, int l,double ph=0)
         {
             from = s;
             to = e;
             pheromone = ph;
             visited = false;
+            length = l;
         }
         public void AddPheromone(double add)
         {
