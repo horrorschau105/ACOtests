@@ -43,5 +43,15 @@ namespace main
             res.Add(new List<Path>()); // empty list for last verticle
             return res;
         }
+        public static void EvaporateAllPaths(List<List<Path>> graph, double phi)
+        {
+            foreach(List<Path> v in graph)
+            {
+                foreach(Path p in v)
+                {
+                    p.Evaporate(phi);
+                }
+            }
+        }
     }
 }

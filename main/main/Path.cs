@@ -30,7 +30,7 @@ namespace main
         {
             visited = true;
         }
-        public void WindOut(double prc) // after period of time the smell of pheromone have to be weaker
+        public void Evaporate(double prc) // after period of time the smell of pheromone have to be weaker
         {
             pheromone *= prc;
         }

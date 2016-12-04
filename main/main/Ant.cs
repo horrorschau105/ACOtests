@@ -25,7 +25,10 @@ namespace main
         }
         public void ChooseWay(List<Path> p)
         {
-            
+            /* take all posible paths
+             * sum up all pheremone 
+             */
+        
         }
     }
 }

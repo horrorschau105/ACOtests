@@ -8,10 +8,12 @@ namespace main
 {
     partial class Program
     {
-        public const int N = 100000;// degree of Rudy's graph
+        public const int N = 1000;// degree of Rudy's graph
         public const int VERTICLES = 8 * N + 5;
-        public const int NEIGH = 2;// how many neighbours has each verticle
-        public const int MAXLENGTH = 10;// max length of path
+        public const int MAXLENGTH = 200;// max length of path
+        public const double PHERO_CONST = 0.1;
+        public const double LENGTH_CONST = 0.1;
+
         static void Main(string[] args)
         {
             /* what to do
@@ -31,7 +33,10 @@ namespace main
                 }
             }
             Console.WriteLine("Shortest Path: {0}", CalcShortPath(graph, 0, VERTICLES));
-
+            // ok, we have a graph
+            /* now some ants
+             * moving this way: repeat(move, evaporate)
+             */
             Console.Read();
         }
     }
