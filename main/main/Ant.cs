@@ -28,20 +28,23 @@ namespace main
         public Path ChooseWay(List<Path> p)
         {
             // List<Path> possibly = new List<Path>();
-            double lower; // sum by all possible paths with pheromone 
-            lower = 0; // mianownik
+            double lower=0 ; // sum by all possible paths with pheromone 
             foreach(Path path in p)
             {
-                    lower += Math.Pow(path.pheromone, Program.PHERO_CONST) * 
-                             Math.Pow((1.0 / path.length), Program.LENGTH_CONST);
+                lower += path.GetMultiplier();
             }
-            Random r = new Random();
+            Random r = new Random(84559821); 
             double rand = r.NextDouble();
-            foreach(Path path in p)
+            //Console.WriteLine("{0}--{1}", p.Count, lower);
+            foreach (Path path in p)
             {
-                rand -= (Math.Pow(path.pheromone, Program.PHERO_CONST) * 
-                         Math.Pow((1.0 / path.length), Program.LENGTH_CONST)) / lower;
-                if (rand < 0) return path;
+                double probability = path.GetMultiplier() / lower;
+                rand -= probability;
+                if (rand < 0)
+                {
+                    this.way.Add(path.from);
+                    return path;
+                } 
             }
             return p.Last();
          }
@@ -51,9 +54,9 @@ namespace main
             {
                 Path next = this.ChooseWay(Program.graph[this.position]);
                 next.AddPheromone(this.pheromoneProduction);
-                this.position = next.to;
+                this.position = next.to; 
                 this.lengthOfWay += next.length;
-                Program.EvaporateAllPaths(Program.graph, next.length / Program.MAXLENGTH);
+                Program.EvaporateAllPaths(Program.graph, 1 - 1 / next.length);
 
             }
             return this.lengthOfWay;

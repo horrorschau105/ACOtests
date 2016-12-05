@@ -10,7 +10,7 @@ namespace main
     {
         public int from;
         public int to;
-        public double pheromone;
+        public double pheromone { get; set; }
         public bool visited { get; set; }
         public int length { get; set;  }
         
@@ -33,6 +33,11 @@ namespace main
         public void Evaporate(double prc) // after period of time the smell of pheromone have to be weaker
         {
             pheromone *= prc;
+        }
+        public double GetMultiplier()
+        { double x = Math.Pow(this.pheromone, Program.PHERO_CONST) *
+                   Math.Pow((Program.MAXLENGTH / this.length), Program.LENGTH_CONST);
+            return x;
         }
     }
 }
