@@ -13,6 +13,7 @@ namespace main
         public List<int> way; // list of visited verticles
         public bool searchingFood;
         public double pheromoneProduction; // how much is it producting pheromon
+        Random r = new Random(1);
         public Ant(double phP,int pos=0)
         {
             position = pos;
@@ -33,9 +34,8 @@ namespace main
             {
                 lower += path.GetMultiplier();
             }
-            Random r = new Random(84559821); 
-            double rand = r.NextDouble();
-            //Console.WriteLine("{0}--{1}", p.Count, lower);
+            double rand = r.NextDouble(); 
+            //Console.WriteLine(rand);
             foreach (Path path in p)
             {
                 double probability = path.GetMultiplier() / lower;
@@ -56,7 +56,7 @@ namespace main
                 next.AddPheromone(this.pheromoneProduction);
                 this.position = next.to; 
                 this.lengthOfWay += next.length;
-                Program.EvaporateAllPaths(Program.graph, 1 - 1 / next.length);
+                Program.EvaporateAllPaths(Program.graph, Program.EVAPORATE_CONST*next.length/Program.MAXLENGTH);
 
             }
             return this.lengthOfWay;

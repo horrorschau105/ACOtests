@@ -8,61 +8,46 @@ namespace main
 {
     partial class Program
     {
-        public const int N = 2;// degree of Rudy's graph
+        public const int N = 20;// degree of Rudy's graph
         public const int VERTICLES = 8 * N + 5;
-        public const int MAXLENGTH = 200;// max length of path
-        public const double PHERO_CONST = 1.5;
-        public const double LENGTH_CONST = 1.2;
-        public const int START_PH_CONST = 20;
-        public const double PH_PROD = 0.9;
+        public const int MAXLENGTH = 10;// max length of path
+        public const double PHERO_CONST = 1.1;
+        public const double LENGTH_CONST = 0.3;
+        public const double PH_PROD = 0.3;
+        public const double EVAPORATE_CONST = 0.5;
         public static List<List<Path>> graph = GenerateGraph(N);
 
         static void Main(string[] args)
         {
-            /* what to do
-             * generate graph (at first directed, 5 paths from 1 verticle)
-             * set begin and end
-             * compute with dijskra best way
-             * let ants go
-             * wait for results
-             * 
-             */
-           
-           /* foreach(List<Path> ver in graph)
-            {
-                foreach(Path p in ver)
-                {
-                   Console.WriteLine("{0}\t{1}\t{2}\t{3}", p.from, p.to, p.length, p.pheromone);
-                }
-            }*/
-            Console.WriteLine("Shortest Path: {0}", CalcShortPath(graph, 0, VERTICLES));
+            int best = CalcShortPath(graph, 0, VERTICLES);
+            Console.WriteLine("Shortest Path: {0}", best);
             Ant a;
             int result, oldres;
             result = 0;
-            for(int i=0;i<10500;++i)
+            for(int i=0;i<100;++i)
             {
                 a = new Ant(PH_PROD);
                 oldres = result;
                 result = a.Start();
-                if(oldres != result)  Console.WriteLine("Way: {0}",a.Start());
-                
-                //foreach (int v in a.way) Console.WriteLine(v);
-            }
-            /*while(a.position != VERTICLES)
-            {
-                Path next = a.ChooseWay(graph[a.position]);
-                next.AddPheromone(a.pheromoneProduction);
-                a.position = next.to;
-                a.lengthOfWay += next.length;
-                EvaporateAllPaths(graph, next.length / MAXLENGTH);
+                if (oldres != result) {
+                    Console.WriteLine("Way: {1} / {0} \t Diff: {2}", result, i, diff(result, best));
+             //       foreach (int v in a.way) Console.WriteLine(v);
 
-            }*/
-            //Console.WriteLine(a.lengthOfWay);
-            // ok, we have a graph
-            /* now some ants
-             * moving this way: repeat(move, evaporate)
-             */
+                }
+            }
+            foreach(List <Path> list in graph)
+            {
+                foreach(Path p in list)
+                {
+             //       Console.WriteLine(p.pheromone);
+                }
+            }
+            Console.WriteLine("fin");
             Console.Read();
+        }
+        static double diff(int best, int any)
+        {
+            return Math.Abs(best - any)*1.0 / best;
         }
     }
 }

@@ -32,7 +32,7 @@ namespace main
         }
         public void Evaporate(double prc) // after period of time the smell of pheromone have to be weaker
         {
-            pheromone *= prc;
+            pheromone = pheromone < prc ? pheromone : pheromone - prc;
         }
         public double GetMultiplier()
         { double x = Math.Pow(this.pheromone, Program.PHERO_CONST) *
