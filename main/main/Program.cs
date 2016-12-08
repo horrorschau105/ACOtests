@@ -8,15 +8,15 @@ namespace main
 {
     partial class Program
     {
-        public const int Ants = 1000; // count of ants;
-        public const int Iterations = 1000;
-        public const int Degree = 100;// degree of Rudy's graph
+        public const int Ants = 10; // count of ants;
+        public const int Iterations = 100;
+        public const int Degree = 10;// degree of Rudy's graph
         public const int Verticles = 8 * Degree + 5;
-        public const int MaxLength = 50;// max length of path
-        public const double Alpha = 1; // wykladnik
+        public const int MaxLength = 5;// max length of path
+        public const double Alpha = 0.5; // wykladnik
         public const double Beta = 0.5; // wykladnik
         public const double Ro = 0.1; // p in (1-p)*pheromone
-        public const double Q = 1; /// adding pheromone
+        public const double Q = 0.5; /// adding pheromone
         public static List<List<Path>> graph = GenerateGraph(Degree, Verticles);
 
         static void Main(string[] args)
@@ -24,7 +24,7 @@ namespace main
             
             int best = CalcShortPath(graph, 0, Verticles);
             List<Ant> ants = new List<Ant>();
-            List<int> results = new List<int>();
+            List<int> results = new List<int>() { MaxLength * Verticles};
             for (int j = 0; j < Ants; j++)  ants.Add(new Ant());
             //int result, oldres;
             //result = 0;
@@ -45,9 +45,12 @@ namespace main
                     if (ant.position == Verticles)  // in last verticle, move to start and update pheromones
                     {
                         var delta = Q / ant.lengthOfWay;
-                        ant.way.ForEach(path => path.pheromone += delta);
+                        if (results.Min() > ant.lengthOfWay) ant.way.ForEach(path => path.pheromone += 2*delta);
+                        else ant.way.ForEach(path => path.pheromone += delta);
                         results.Add(ant.lengthOfWay);
                         ant.Clear();
+
+                        graph.ForEach(list => list.ForEach(path => path.pheromone *= (1 - Ro)));
                     }
                 }
             }
