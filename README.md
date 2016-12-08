@@ -1,3 +1,2 @@
 # ACOtests
-I'm gonna try to write ACO in C#
-Ant Colony Optimisation
+Ant Colony Optimisation, one of the easier version.
