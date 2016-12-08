@@ -20,9 +20,9 @@ namespace main
                 int top = q.Dequeue();
                 foreach(Path p in graph[top])
                 {
-                    if(dist[p.to] > dist[p.from] + p.length)
+                    if(dist[p.to] > dist[p.from] + p.Length)
                     {
-                        dist[p.to] = dist[p.from] + p.length;
+                        dist[p.to] = dist[p.from] + p.Length;
                         q.Enqueue(p.to);
                     }
                 }

@@ -12,32 +12,38 @@ namespace main
         public int to;
         public double pheromone { get; set; }
         public bool visited { get; set; }
-        public int length { get; set;  }
-        
+        private int _length;
+        public double InvertedLength { get; set; }
+        public int Length
+        {
+            get { return _length; }
+            set
+            {
+                _length = value;
+                InvertedLength = 1.0 / value;
+            }
+        }
+
         public Path(int s, int e, int l,double ph=0)
         {
             from = s;
             to = e;
             pheromone = ph;
             visited = false;
-            length = l;
+            Length = l;
         }
-        public void AddPheromone(double add)
+        public void Update(double delta=0)
         {
-            pheromone += add;
+            pheromone = (1-Program.Ro)*pheromone + delta;
         }
         public void Visit()
         {
             visited = true;
         }
-        public void Evaporate(double prc) // after period of time the smell of pheromone have to be weaker
-        {
-            pheromone = pheromone < prc ? pheromone : pheromone - prc;
-        }
         public double GetMultiplier()
-        { double x = Math.Pow(this.pheromone, Program.PHERO_CONST) *
-                   Math.Pow((Program.MAXLENGTH / this.length), Program.LENGTH_CONST);
-            return x;
+        {
+            return Math.Pow(this.pheromone, Program.Alpha) *
+                   Math.Pow(InvertedLength, Program.Beta);
         }
     }
 }
