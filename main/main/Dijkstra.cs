@@ -28,7 +28,6 @@ namespace main
                 }
             }
             return dist[to];
-            
         }
     }
 }

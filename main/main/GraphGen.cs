@@ -44,18 +44,5 @@ namespace main
             res.Add(new List<Path>()); // empty list for last verticle
             return res;
         }
-        public static void EvaporateAllPaths(Ant a)
-        {
-            foreach(List<Path> v in graph)
-            {
-                foreach(var path in v)
-                {
-                    if (path.visited) path.Update(Q / a.lengthOfWay);
-                    else path.Update();
-                    path.visited = false;
-                    
-                }
-            }
-        }
     }
 }
