@@ -29,6 +29,5 @@ namespace main
             way = new List<Path>();
             lengthOfWay = 0;
         }
-        
     }
 }
