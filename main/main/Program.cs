@@ -13,10 +13,10 @@ namespace main
         public const int Degree = 1000;// degree of Rudy's graph
         public const int Verticles = 8 * Degree + 5;
         public const int MaxLength = 50;// max length of path
-        public const double Alpha = 0.5; // wykladnik
-        public const double Beta = 0.5; // wykladnik
-        public const double Ro = 0.1; // p in (1-p)*pheromone
-        public const double Q = 0.1; /// adding pheromone
+        public const double Alpha = 0.5; // pheromone
+        public const double Beta = 0.5; // length
+        public const double Ro = 0.1; // evaporating
+        public const double Q = 0.1; // adding pheromone
         public const double Bonus = 2; // prize for finding better way
         public static List<List<Path>> graph = GenerateGraph(Degree, Verticles);
 
