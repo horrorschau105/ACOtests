@@ -16,18 +16,18 @@ namespace main
         public const double Alpha = 0.5; // wykladnik
         public const double Beta = 0.5; // wykladnik
         public const double Ro = 0.1; // p in (1-p)*pheromone
-        public const double Q = 0.1; /// adding pheromone
+        public const double Q = 0.1; // adding pheromone
         public const double Bonus = 2; // prize for finding better way
         public static List<List<Path>> graph = GenerateGraph(Degree, Verticles);
 
-        static void Main(string[] args)
+        static void Main(string[] args)s
         {
             int best = CalcShortPath(graph, 0, Verticles);
             List<Ant> ants = new List<Ant>();
             List<int> results = new List<int>() { MaxLength * Verticles};
             for (int j = 0; j < Ants; j++)  ants.Add(new Ant());
             double n = 0.0;
-            Random r = new Random(105);
+            Random r = new Random(5956);
             for(int i=0;i<Iterations;++i)
             {
                 foreach(var ant in ants)
