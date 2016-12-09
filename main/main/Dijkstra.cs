@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using System.Collections.Generic;
 namespace main
 {
     partial class Program
@@ -11,7 +6,7 @@ namespace main
         static int CalcShortPath(List<List<Path>> graph, int from, int to)
         {
             int[] dist = new int[graph.Count];
-            for(int i=0;i<dist.Length;++i) dist[i] = Int32.MaxValue;
+            for(int i=0;i<dist.Length;++i) dist[i] = int.MaxValue;
             Queue<int> q = new Queue<int>();
             dist[from] = 0;
             q.Enqueue(from);
