@@ -5,15 +5,15 @@ namespace main
 {
     partial class Program
     {
-        public const int Ants = 100; // count of ants;
-        public const int Iterations = 1000;
-        public const int Degree = 100;// degree of Rudy's graph
+        public const int Ants = 50; // count of ants;
+        public const int Iterations = 100000;
+        public const int Degree = 500;// degree of Rudy's graph
         public const int Verticles = 8 * Degree + 5;
-        public const int MaxLength = 5;// max length of path
+        public const int MaxLength = 10;// max length of path
         public const double Alpha = 0.5; // wykladnik
         public const double Beta = 3.5; // wykladnik
         public const double Ro = 0.24; // p in (1-p)*pheromone
-        public const double Q = 0.14; // adding pheromone
+        public const double Q = 0.24; // adding pheromone
         public const double Bonus = 5; // prize for finding better way
         public static List<List<Path>> graph = GenerateGraph(Degree, Verticles);
 
@@ -59,8 +59,8 @@ namespace main
             int index = 0;
             foreach (var ant in sorted)
             {
-                double delta = Q*1.0 / ant.lengthOfWay;
-                ant.way.ForEach(path => path.pheromone += Bonus * (2.0 - index / count) * delta);
+                double delta = Q / ant.lengthOfWay;
+                ant.way.ForEach(path => path.pheromone += Bonus * (1.1 - index / count) * delta);
                 index++;
             }
             list.ForEach(ant => ant.Clear());
