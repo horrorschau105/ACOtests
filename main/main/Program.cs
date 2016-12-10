@@ -7,19 +7,17 @@ namespace main
     {
         public const int Ants = 50; // count of ants;
         public const int Iterations = 100000;
-        public const int Degree = 500;// degree of Rudy's graph
-        public const int Verticles = 8 * Degree + 5;
+        public const int Verticles = 9;
         public const int MaxLength = 10;// max length of path
         public const double Alpha = 0.5; // wykladnik
         public const double Beta = 3.5; // wykladnik
         public const double Ro = 0.24; // p in (1-p)*pheromone
         public const double Q = 0.24; // adding pheromone
         public const double Bonus = 5; // prize for finding better way
-        public static List<List<Path>> graph = GenerateGraph(Degree, Verticles);
+        public static List<List<Path>> graph = GenerateGraph();
 
         static void Main(string[] args)
         {
-            int best = CalcShortPath(graph, 0, Verticles);
             List<Ant> ants = new List<Ant>();
             List<int> results = new List<int>() { MaxLength * Verticles};
             List<Ant> finished = new List<Ant>();
@@ -47,7 +45,6 @@ namespace main
                 }
             }
             Console.WriteLine($"Best found: {results.Min()}");
-            Console.WriteLine($"Shortest Path: {best}");
             Console.WriteLine("fin");
             Console.Read();
         }
