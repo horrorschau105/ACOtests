@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
+using System;
+using Combinatorics.Collections;
 namespace main
 {
     partial class Program
     {
-        static int CalcShortPath(List<List<Path>> graph, int from, int to)
+        static int CalcShortPath(int from, int to)
         {
             int[] dist = new int[graph.Count];
             for(int i=0;i<dist.Length;++i) dist[i] = int.MaxValue;
@@ -23,6 +25,24 @@ namespace main
                 }
             }
             return dist[to];
+        }
+        static int ShortestCircuit()
+        {
+            int result = int.MaxValue;
+            int curr;
+            List<int> way;
+            List<int> perm = new List<int>();
+            for (int i = 1; i <= Verticles; ++i) perm.Add(i);
+            var p = new Permutations<int>(perm);
+            foreach(var v in p)
+            {
+                curr = 0;
+                way = new List<int>() { 0 };
+                way.AddRange(v);
+                for (int i = 0; i <= Verticles; ++i) curr += graph[way[i]][way[(i + 1) % Verticles]].Length;
+                result = Math.Min(result, curr);
+            }
+            return result;
         }
     }
 }
