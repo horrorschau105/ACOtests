@@ -47,7 +47,7 @@ namespace main
                     n = possible.Sum((path => path.GetMultiplier())); // :)
                     foreach(var path in possible)
                     {
-                        if (r.NextDouble() > path.GetMultiplier() / n) continue;
+                        if (r.NextDouble() < path.GetMultiplier() / n) continue;
                         ant.Move(path);
                         ant.cities[path.to] = true;
                         ant.visits++;
@@ -59,21 +59,6 @@ namespace main
             Console.WriteLine($"Best found: {results.Min()}");
             Console.WriteLine("fin");
             Console.Read();
-        }
-        static void ASrank(List<Ant> list, List<int> results)
-        {
-            results.AddRange(list.Select(ant => ant.lengthOfWay));
-            var sorted = list.OrderBy(ant => ant.lengthOfWay).ToList(); // ascending
-            int count = list.Count;
-            int index = 0;
-            foreach (var ant in sorted)
-            {
-                double delta = Q / ant.lengthOfWay;
-                ant.way.ForEach(path => path.pheromone += Bonus * (1.1 - index / count) * delta);
-                index++;
-            }
-            list.ForEach(ant => ant.Clear());
-            graph.ForEach(l => l.ForEach(path => path.pheromone *= (1 - Ro)));
         }
     }
 }

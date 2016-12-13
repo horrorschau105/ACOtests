@@ -22,7 +22,7 @@ namespace main
                     }
                 }
             }
-           // res.ForEach(list => { list.ForEach(path => Console.Write(path.Length)); Console.WriteLine(); });
+            res.ForEach(list => { list.ForEach(path => Console.Write(path.Length)); Console.WriteLine(); });
             return res;
         }
     }
