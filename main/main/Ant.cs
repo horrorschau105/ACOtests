@@ -16,7 +16,7 @@ namespace main
             position = pos;
             start_city = pos;
             way = new List<Path>();
-            visits = 0;
+            visits = 1;
             lengthOfWay = 0;
             cities = new List<bool>();
             for (int i = 0; i <= Program.Verticles; ++i) cities.Add(false);
@@ -31,7 +31,7 @@ namespace main
         public void Clear()
         {
             position = start_city;
-            visits = 0;
+            visits = 1;
             way = new List<Path>();
             lengthOfWay = 0;
             for (int i = 0; i <= Program.Verticles; ++i) cities[i] = false;
