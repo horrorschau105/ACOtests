@@ -8,16 +8,16 @@ namespace main
 {
     partial class Program
     {
-        public const int Ants = 100; // count of ants;
-        public const int Iterations = 10000;
+        public const int Ants = 200; // count of ants;
+        public const int Iterations = 100000;
         public const int Degree = 100;// degree of Rudy's graph
         public const int Verticles = 8 * Degree + 5;
-        public const int MaxLength = 5;// max length of path
-        public const double Alpha = 1; // pheromone
-        public const double Beta = 1; // length
-        public const double Ro = 0.9; // evaporating
-        public const double Q = 2; // adding pheromone
-        public const double Bonus = 10; // prize for finding better way
+        public const int MaxLength = 10;// max length of path
+        public const double Alpha = 1.9; // pheromone
+        public const double Beta = 8.45; // length
+        public const double Ro = 0.21; // evaporating
+        public const double Q = 2.14; // adding pheromone
+        public const double Bonus = 7.3; // prize for finding better way
         public static List<List<Path>> graph = GenerateGraph(Degree, Verticles);
 
         static void Main(string[] args)
@@ -38,7 +38,7 @@ namespace main
                         if (results.Min() > ant.lengthOfWay) ant.way.ForEach(path => path.pheromone += Bonus * delta);
                         else ant.way.ForEach(path => path.pheromone += delta);
                         results.Add(ant.lengthOfWay);
-                        Console.WriteLine("{0}#: {1}", results.Count, ant.lengthOfWay);
+                   //     Console.WriteLine("{0}#: {1}", results.Count, ant.lengthOfWay);
                         ant.Clear();
                         graph.ForEach(list => list.ForEach(path => path.pheromone *= (1 - Ro)));
                         graph.ForEach(list => list.ForEach(path => path.pheromone = (path.pheromone < 1.0 / Verticles ? 1.0 / Verticles : path.pheromone)));
