@@ -12,23 +12,23 @@ namespace main
         public const int Iterations = 10000;
         public const int Degree = 100;// degree of Rudy's graph
         public const int Verticles = 8 * Degree + 5;
-        public const int MaxLength = 50;// max length of path
-        public const double Alpha = 0.5; // pheromone
-        public const double Beta = 2.5; // length
-        public const double Ro = 0.1; // evaporating
-        public const double Q = 0.1; // adding pheromone
-        public const double Bonus = 3; // prize for finding better way
+        public const int MaxLength = 5;// max length of path
+        public const double Alpha = 1; // pheromone
+        public const double Beta = 1; // length
+        public const double Ro = 0.9; // evaporating
+        public const double Q = 2; // adding pheromone
+        public const double Bonus = 10; // prize for finding better way
         public static List<List<Path>> graph = GenerateGraph(Degree, Verticles);
 
         static void Main(string[] args)
         {
             int best = CalcShortPath(graph, 0, Verticles);
             List<Ant> ants = new List<Ant>();
-            List<int> results = new List<int>() { MaxLength * Verticles};
+            List<int> results = new List<int>() { MaxLength * Verticles };
             for (int j = 0; j < Ants; j++)  ants.Add(new Ant());
             double n = 0.0;
             Random r = new Random(105);
-            for(int i=0;i<Iterations;++i)
+            for (int i = 0; i < Iterations; ++i) 
             {
                 foreach(var ant in ants)
                 {
@@ -41,16 +41,15 @@ namespace main
                         Console.WriteLine("{0}#: {1}", results.Count, ant.lengthOfWay);
                         ant.Clear();
                         graph.ForEach(list => list.ForEach(path => path.pheromone *= (1 - Ro)));
+                        graph.ForEach(list => list.ForEach(path => path.pheromone = (path.pheromone < 1.0 / Verticles ? 1.0 / Verticles : path.pheromone)));
                     }
-                    n = graph[ant.position].Sum(
-                            (path => path.GetMultiplier())); // :)
+                    n = graph[ant.position].Sum((path => path.GetMultiplier())); // :)
                     foreach(var path in graph[ant.position])
                     {
                         if (r.NextDouble() > path.GetMultiplier() / n) continue;
                         ant.Move(path);
                         break;
                     }
-                    
                 }
             }
             Console.WriteLine($"Best found: {results.Min()}, Difference from best: {diff(results.Min(), best)}");
@@ -63,5 +62,4 @@ namespace main
             return Math.Abs(best - res)* 1.0 / res;
         }
     }
-    
 }
