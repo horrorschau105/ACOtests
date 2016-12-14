@@ -10,12 +10,12 @@ namespace main
     {
         public const int Ants = 200; // count of ants;
         public const int Iterations = 100000;
-        public const int Degree = 100;// degree of Rudy's graph
+        public const int Degree = 1000;// degree of Rudy's graph
         public const int Verticles = 8 * Degree + 5;
         public const int MaxLength = 10;// max length of path
-        public const double Alpha = 1.9; // pheromone
-        public const double Beta = 8.45; // length
-        public const double Ro = 0.21; // evaporating
+        public const double Alpha = 1.34; // pheromone
+        public const double Beta = 9.7; // length
+        public const double Ro = 0.3; // evaporating
         public const double Q = 2.14; // adding pheromone
         public const double Bonus = 7.3; // prize for finding better way
         public static List<List<Path>> graph = GenerateGraph(Degree, Verticles);
